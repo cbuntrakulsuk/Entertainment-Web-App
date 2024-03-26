@@ -4,6 +4,7 @@ import "./globals.css";
 
 //components
 import Navbar from "../components/Navbar";
+import Search from "../components/Search";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,8 +21,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Navbar />
-        {children}
+        <div className="w-full flex">
+          <Navbar />
+          <div className="mt-12">
+            <Search />
+            <div>{children}</div>
+          </div>
+        </div>
       </body>
     </html>
   );
