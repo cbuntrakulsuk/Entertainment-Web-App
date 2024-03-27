@@ -1,12 +1,16 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Outfit } from "next/font/google";
 import "./globals.css";
 
 //components
 import Navbar from "../components/Navbar";
 import Search from "../components/Search";
 
-const inter = Inter({ subsets: ["latin"] });
+const outfit = Outfit({
+  subsets: ["latin"],
+  weight: ["300", "500"],
+  variable: "--font-outfit",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,12 +24,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <div className="w-full flex">
-          <Navbar />
-          <div className="mt-12">
-            <Search />
-            <div>{children}</div>
+      <body className={outfit.className}>
+        <div className="flex justify-center">
+          <div className="w-full max-w-screen-2xl flex">
+            <Navbar />
+            <div className="mt-12">
+              <Search />
+              <div>{children}</div>
+            </div>
           </div>
         </div>
       </body>

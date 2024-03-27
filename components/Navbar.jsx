@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 //image imports
 import Logo from "../public/assets/logo.svg";
@@ -14,38 +15,33 @@ const Navbar = () => {
     <>
       <div className="w-24 h-[960px] m-8 bg-semiDarkBlue text-center rounded-2xl">
         <div className="pt-8 pb-20 flex justify-center items-center">
-          <Image
-            src={Logo} // Path to your image
-            alt="Logo" // Descriptive alternative text
-          />
+          <Link href="/">
+            <Logo className="fill-grayBlue hover:fill-redAccent" />
+          </Link>
         </div>
         <div className="pb-10 flex justify-center items-center">
-          <Image
-            src={Home} // Path to your image
-            alt="Navigation icon for Home" // Descriptive alternative text
-          />
+          <Link href="/">
+            <Home className="fill-grayBlue hover:fill-redAccent" />
+          </Link>
         </div>
         <div className="pb-10 flex justify-center items-center">
-          <Image
-            src={Movies} // Path to your image
-            alt="Navigation icon for Movies" // Descriptive alternative text
-          />
+          <Link href="/movies">
+            <Movies className="fill-grayBlue hover:fill-redAccent" />
+          </Link>
         </div>
         <div className="pb-10 flex justify-center items-center">
-          <Image
-            src={TV} // Path to your image
-            alt="Navigation icon for TV Series" // Descriptive alternative text
-          />
+          <Link href="/tv">
+            <TV className="fill-grayBlue hover:fill-redAccent" />
+          </Link>
         </div>
         <div className="pb-10 flex justify-center items-center mb-[500px]">
-          <Image
-            src={Bookmarks} // Path to your image
-            alt="Navigation icon for Bookmarks" // Descriptive alternative text
-          />
+          <Link href="/bookmarks">
+            <Bookmarks className="fill-grayBlue hover:fill-redAccent" />
+          </Link>
         </div>
         <div className="pb-10 flex justify-center items-center">
           <Image
-            className="border rounded-full border-white"
+            className="border rounded-full border-white cursor-pointer"
             src={Avatar} // Path to your image
             width={40}
             height={40}

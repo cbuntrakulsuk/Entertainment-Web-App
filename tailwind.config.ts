@@ -15,6 +15,9 @@ const config: Config = {
         semiDarkBlue: "#161D2F",
         pureWhite: "#FFFFFF",
       },
+      fontFamily: {
+        outfit: ["var(--font-outfit)"],
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
