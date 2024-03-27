@@ -5,7 +5,12 @@ import CardImg from "../public/assets/thumbnails/the-great-lands/regular/large.j
 import BookmarkEmpty from "../public/assets/icon-bookmark-empty.svg";
 const CardImgPath = "https://image.tmdb.org/t/p/w500";
 
-const Card = (props) => {
+const Card = (props: {
+  key: number;
+  poster: string;
+  year: string;
+  title: string;
+}) => {
   return (
     <div className="mt-10 relative w-[280px]">
       <div className="w-8 h-8 mt-4 mr-4 rounded-full bg-[#979797] flex justify-center items-center absolute right-0 group hover:bg-white cursor-pointer">
@@ -13,7 +18,7 @@ const Card = (props) => {
       </div>
       <Image
         className="rounded-lg"
-        src={props.poster ? `${CardImgPath}${props.poster}` : { CardImg }} // Default image path
+        src={CardImgPath + props.poster}
         alt="Movie Card" // Descriptive alternative text
         width={280}
         height={174}
