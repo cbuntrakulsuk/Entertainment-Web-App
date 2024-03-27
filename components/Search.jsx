@@ -11,7 +11,7 @@ const Search = () => {
   const handleBlur = () => setIsFocused(false);
   return (
     <>
-      <div className="relative w-full flex items-center">
+      <div className="w-full flex items-center">
         <SearchIcon />
         <input
           type="text"
@@ -23,7 +23,7 @@ const Search = () => {
       </div>
       <div
         id="search-underline"
-        className={`border border-grayBlue border-t-0 border-l-0 border-r-0 w-3/4 left-[316px] absolute ${
+        className={`border border-grayBlue border-t-0 border-l-0 border-r-0 w-full ${
           isFocused ? "opacity-100" : "opacity-0"
         }`}
       ></div>
