@@ -13,6 +13,8 @@ const Card = (props: {
   poster: string;
   year: string;
   title: string;
+  type: string;
+  name: string;
 }) => {
   const [hovered, setHovered] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
@@ -63,11 +65,13 @@ const Card = (props: {
       {/* Additional information */}
       <div className="mt-2 ml-1">
         <ul className="list-disc flex font-light text-sm">
-          <li className="mr-7">{props.year}</li>
-          <li className="mr-7">Movie</li>
+          <li className="mr-7 list-none">{props.year}</li>
+          <li className="mr-7">{props.type}</li>
           <li className="mr-7">PG</li>
         </ul>
-        <div className="text-lg mt-1">{props.title}</div>
+        <div className="text-lg mt-1">
+          {props.title ? props.title : props.name}
+        </div>
       </div>
     </div>
   );
