@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -11,6 +12,11 @@ import Bookmarks from "../public/assets/icon-nav-bookmark.svg";
 import Avatar from "../public/assets/image-avatar.png";
 
 const Navbar = () => {
+  const [activeCategory, setActiveCategory] = useState("home");
+  const handleClick = (option: string) => {
+    setActiveCategory(option); // Update the state with the string
+  };
+
   return (
     <>
       <div className="w-24 h-[960px] m-8 bg-semiDarkBlue text-center rounded-2xl">
@@ -21,22 +27,44 @@ const Navbar = () => {
         </div>
         <div className="pb-10 flex justify-center items-center">
           <Link href="/">
-            <Home className="fill-grayBlue hover:fill-redAccent" />
+            <Home
+              className={`${
+                activeCategory === "home" ? "fill-redAccent" : "fill-grayBlue"
+              } hover:fill-redAccent`}
+              onClick={() => handleClick("home")}
+            />
           </Link>
         </div>
         <div className="pb-10 flex justify-center items-center">
           <Link href="/movies">
-            <Movies className="fill-grayBlue hover:fill-redAccent" />
+            <Movies
+              className={`${
+                activeCategory === "movies" ? "fill-redAccent" : "fill-grayBlue"
+              } hover:fill-redAccent`}
+              onClick={() => handleClick("movies")}
+            />
           </Link>
         </div>
         <div className="pb-10 flex justify-center items-center">
           <Link href="/tv">
-            <TV className="fill-grayBlue hover:fill-redAccent" />
+            <TV
+              className={`${
+                activeCategory === "tv" ? "fill-redAccent" : "fill-grayBlue"
+              } hover:fill-redAccent`}
+              onClick={() => handleClick("tv")}
+            />
           </Link>
         </div>
         <div className="pb-10 flex justify-center items-center mb-[500px]">
           <Link href="/bookmarks">
-            <Bookmarks className="fill-grayBlue hover:fill-redAccent" />
+            <Bookmarks
+              className={`${
+                activeCategory === "bookmarks"
+                  ? "fill-redAccent"
+                  : "fill-grayBlue"
+              } hover:fill-redAccent`}
+              onClick={() => handleClick("bookmarks")}
+            />
           </Link>
         </div>
         <div className="pb-10 flex justify-center items-center">

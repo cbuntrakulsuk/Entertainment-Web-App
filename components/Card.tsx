@@ -1,6 +1,9 @@
+"use client";
 import React from "react";
 import Image from "next/image";
+import { useState } from "react";
 //image imports
+import PlayIcon from "../public/assets/icon-play.svg";
 import CardImg from "../public/assets/thumbnails/the-great-lands/regular/large.jpg"; //placeholder
 import BookmarkEmpty from "../public/assets/icon-bookmark-empty.svg";
 const CardImgPath = "https://image.tmdb.org/t/p/w500";
@@ -11,11 +14,44 @@ const Card = (props: {
   year: string;
   title: string;
 }) => {
+  const [hovered, setHovered] = useState(false);
+  const [isBookmarked, setIsBookmarked] = useState(false);
+
   return (
-    <div className="mt-10 relative w-[280px]">
-      <div className="w-8 h-8 mt-4 mr-4 rounded-full bg-[#979797] flex justify-center items-center absolute right-0 group hover:bg-white cursor-pointer">
-        <BookmarkEmpty className="stroke-white group-hover:stroke-black fill-none" />
+    <div
+      className="relative mt-10 w-[280px]"
+      onMouseOver={() => setHovered(true)}
+      onMouseOut={() => setHovered(false)}
+    >
+      {/* Bookmark button */}
+      <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-[#979797] flex z-20 justify-center items-center group-hover:hidden">
+        <BookmarkEmpty
+          className={`${
+            isBookmarked
+              ? "fill-white"
+              : "fill-[#979797]} stroke-white hover:stroke-black fill-none z-20"
+          }`}
+          onClick={() => setIsBookmarked(!isBookmarked)}
+        />
       </div>
+
+      <div
+        className={`${hovered ? "opacity-100" : "opacity-0"} cursor-pointer`}
+      >
+        {/* Overlay */}
+        <div className="group flex absolute inset-0 bg-black rounded-lg opacity-50 h-[157.5px]"></div>
+        {/* Play button */}
+        <div className="flex absolute inset-0 justify-center items-center h-[157.5px]">
+          <div className="w-[117px] h-12 flex justify-center items-center bg-[#979797] rounded-full opacity-50"></div>
+          <div className="absolute flex justify-center items-center">
+            {/* Play icon */}
+            <PlayIcon className="mr-4" />
+            <span className="font-medium text-lg">Play</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Image */}
       <Image
         className="rounded-lg"
         src={CardImgPath + props.poster}
@@ -23,13 +59,15 @@ const Card = (props: {
         width={280}
         height={174}
       />
-      <div>
-        <ul className="list-disc flex mt-2 ml-1 font-light text-sm">
-          <li className="mr-7 list-none">{props.year}</li>
+
+      {/* Additional information */}
+      <div className="mt-2 ml-1">
+        <ul className="list-disc flex font-light text-sm">
+          <li className="mr-7">{props.year}</li>
           <li className="mr-7">Movie</li>
           <li className="mr-7">PG</li>
         </ul>
-        <div className="text-lg ml-1 mt-1">{props.title}</div>
+        <div className="text-lg mt-1">{props.title}</div>
       </div>
     </div>
   );
