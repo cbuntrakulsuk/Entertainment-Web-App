@@ -7,6 +7,8 @@ interface Movie {
   title: string;
   release_date: string;
   backdrop_path: string;
+  name: string;
+  type: string;
   // Add other relevant movie properties based on the API response
 }
 
@@ -17,7 +19,6 @@ async function getMovies() {
 
 export default async function MovieList() {
   const movies = await getMovies();
-
   return (
     <div className="grid grid-cols-4 gap-x-10">
       {movies.map((movie: Movie) => (
@@ -26,6 +27,7 @@ export default async function MovieList() {
           title={movie.title}
           year={movie.release_date.slice(0, 4)}
           poster={movie.backdrop_path}
+          name={movie.name}
           type="Movie"
         />
       ))}

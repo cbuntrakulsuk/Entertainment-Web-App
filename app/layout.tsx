@@ -28,7 +28,7 @@ export default function RootLayout({
         <div className="flex justify-center">
           <div className="w-full max-w-screen-2xl flex">
             <Navbar />
-            <div className="mt-12">
+            <div className="mt-12 w-[1240px]">
               <Search />
               <div>{children}</div>
             </div>

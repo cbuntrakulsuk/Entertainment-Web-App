@@ -27,3 +27,24 @@ body {
     text-wrap: balance;
   }
 }
+
+.embla {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.embla__container {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 30%; /* Each slide covers 80% of the viewport */
+  gap: 2rem;
+}
+
+.embla__slide {
+  scroll-snap-align: start; /* Ensure each slide snaps to the start of the container */
+}
+
+#last-Slide {
+  width: 372px;
+  margin-right: 2rem;
+}
