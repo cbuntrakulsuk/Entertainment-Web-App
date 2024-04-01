@@ -64,7 +64,7 @@ const Card = (props: {
 
       {/* Additional information */}
       <div className="mt-2 ml-1">
-        <ul className="list-disc flex font-light text-sm">
+        <ul className="list-disc flex font-light text-[13px]">
           <li className="mr-7 list-none">{props.year}</li>
           <li className="mr-7">{props.type}</li>
           <li className="mr-7">PG</li>

@@ -1,11 +1,13 @@
 "use client";
 import React from "react";
 import useEmblaCarousel from "embla-carousel-react";
+import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 import Autoplay from "embla-carousel-autoplay";
 
 const Slider = (props: { cards: JSX.Element[] }) => {
   const [emblaRef] = useEmblaCarousel({ loop: true, align: "start" }, [
     Autoplay({ playOnInit: true, delay: 5000 }),
+    WheelGesturesPlugin({ forceWheelAxis: "x" }),
   ]);
   return (
     <div className="embla" ref={emblaRef}>

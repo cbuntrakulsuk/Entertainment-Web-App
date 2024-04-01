@@ -36,15 +36,16 @@ body {
 .embla__container {
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: 30%; /* Each slide covers 80% of the viewport */
+  /* grid-auto-columns: 35%; Each slide covers 80% of the viewport */
   gap: 2rem;
 }
 
 .embla__slide {
+  width: 470px;
+  height: 264px;
   scroll-snap-align: start; /* Ensure each slide snaps to the start of the container */
 }
 
 #last-Slide {
-  width: 372px;
   margin-right: 2rem;
 }

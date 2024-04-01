@@ -4,31 +4,34 @@ import Slider from "@/components/Slider";
 import LargeCard from "./LargeCard";
 
 interface TrendingItem {
+  media_type: string;
   id: number; // Assuming ID exists in the response
   title: string;
   release_date: string;
   backdrop_path: string;
-  name: string;
-  type: string;
+  first_air_date: string;
+  original_name: string;
 }
 
 async function getTrending() {
-  const response = await tmdb.get("movie/popular");
+  const response = await tmdb.get("trending/all/day");
   return response.data.results;
 }
 
 export default async function TrendingList() {
   const trendingResponse = await getTrending();
   const trending = trendingResponse.slice(0, 5);
+  console.log(trending);
 
   const cards = trending.map((item: TrendingItem) => (
     <LargeCard
       key={item.id}
       title={item.title}
-      year={item.release_date.slice(0, 4)}
+      name={item.original_name}
+      year={item.release_date}
       poster={item.backdrop_path}
-      name={item.name}
-      type="Movie"
+      type={item.media_type}
+      airDate={item.first_air_date}
     />
   ));
 

@@ -14,13 +14,14 @@ const LargeCard = (props: {
   title: string;
   type: string;
   name: string;
+  airDate: string;
 }) => {
   const [hovered, setHovered] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
 
   return (
     <div
-      className="relative mt-10"
+      className="relative"
       onMouseOver={() => setHovered(true)}
       onMouseOut={() => setHovered(false)}
     >
@@ -40,9 +41,9 @@ const LargeCard = (props: {
         className={`${hovered ? "opacity-100" : "opacity-0"} cursor-pointer`}
       >
         {/* Overlay */}
-        <div className="group flex absolute inset-0 bg-black rounded-lg opacity-50 h-[209px]"></div>
+        <div className="group flex absolute inset-0 bg-black rounded-lg opacity-50 h-[264px]"></div>
         {/* Play button */}
-        <div className="flex absolute inset-0 justify-center items-center h-[209px] cursor-pointer">
+        <div className="flex absolute inset-0 justify-center items-center h-[264px] cursor-pointer">
           <div className="w-[117px] h-12 flex justify-center items-center bg-[#979797] rounded-full opacity-50"></div>
           <div className="absolute flex justify-center items-center">
             {/* Play icon */}
@@ -58,17 +59,23 @@ const LargeCard = (props: {
         src={CardImgPath + props.poster}
         alt="Movie Card" // Descriptive alternative text
         width={470}
-        height={230}
+        height={264}
       />
 
       {/* Additional information */}
-      <div className="mt-2 ml-1">
-        <ul className="list-disc flex font-light text-sm">
-          <li className="mr-7 list-none">{props.year}</li>
-          <li className="mr-7">{props.type}</li>
+      <div className="mt-2  absolute bottom-0 m-5">
+        <ul className="list-disc flex font-light text-[15px]">
+          <li className="mr-7 list-none">
+            {props.year ? props.year.slice(0, 4) : props.airDate.slice(0, 4)}
+          </li>
+          <li className="mr-7">
+            {props.type === "tv" ? "TV Series" : "Movie"}
+          </li>
           <li className="mr-7">PG</li>
         </ul>
-        <div className="text-lg mt-1">{props.title}</div>
+        <div className="text-2xl mt-1">
+          {props.title ? props.title : props.name}
+        </div>
       </div>
     </div>
   );
