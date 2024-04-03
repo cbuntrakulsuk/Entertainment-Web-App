@@ -1,10 +1,10 @@
 "use client";
-import React from "react";
+import React, { useContext } from "react";
 import Image from "next/image";
 import { useState } from "react";
+import { BookmarkContext } from "@/components/BookmarkContext";
 //image imports
 import PlayIcon from "../public/assets/icon-play.svg";
-import CardImg from "../public/assets/thumbnails/the-great-lands/regular/large.jpg"; //placeholder
 import BookmarkEmpty from "../public/assets/icon-bookmark-empty.svg";
 const CardImgPath = "https://image.tmdb.org/t/p/w500";
 
@@ -15,9 +15,27 @@ const Card = (props: {
   title: string;
   type: string;
   name: string;
+  id: number;
+  bookmarked: boolean;
 }) => {
   const [hovered, setHovered] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
+  const { addBookmark } = useContext(BookmarkContext);
+
+  const handleBookmark = (cardData: {
+    key: number;
+    poster: string;
+    year: string;
+    title: string;
+    type: string;
+    name: string;
+    bookmarked: boolean;
+    id: number;
+  }) => {
+    console.log(cardData.poster);
+    addBookmark(cardData);
+    setIsBookmarked(!isBookmarked);
+  };
 
   return (
     <div
@@ -26,14 +44,14 @@ const Card = (props: {
       onMouseOut={() => setHovered(false)}
     >
       {/* Bookmark button */}
-      <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-[#979797] flex z-20 justify-center items-center group-hover:hidden">
+      <div className="cursor-pointer absolute top-4 right-4 w-8 h-8 rounded-full bg-[#979797] flex z-20 justify-center items-center group-hover:hidden">
         <BookmarkEmpty
           className={`${
             isBookmarked
               ? "fill-white"
               : "fill-[#979797]} stroke-white hover:stroke-black fill-none z-20"
           }`}
-          onClick={() => setIsBookmarked(!isBookmarked)}
+          onClick={() => handleBookmark(props)}
         />
       </div>
 

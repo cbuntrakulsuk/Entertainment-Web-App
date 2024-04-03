@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
 import "./globals.css";
-
+import { BookmarkProvider } from "../components/BookmarkContext";
 //components
 import Navbar from "../components/Navbar";
 import Search from "../components/Search";
@@ -25,15 +25,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={outfit.className}>
-        <div className="flex justify-center">
-          <div className="w-full max-w-screen-2xl flex">
-            <Navbar />
-            <div className="mt-12 w-[1240px]">
-              <Search />
-              <div>{children}</div>
+        <BookmarkProvider>
+          <div className="flex justify-center">
+            <div className="w-full max-w-screen-2xl flex">
+              <Navbar />
+              <div className="mt-12 w-[1240px]">
+                <Search />
+                <div>{children}</div>
+              </div>
             </div>
           </div>
-        </div>
+        </BookmarkProvider>
       </body>
     </html>
   );

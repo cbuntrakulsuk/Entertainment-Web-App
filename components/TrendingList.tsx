@@ -21,7 +21,6 @@ async function getTrending() {
 export default async function TrendingList() {
   const trendingResponse = await getTrending();
   const trending = trendingResponse.slice(0, 5);
-  console.log(trending);
 
   const cards = trending.map((item: TrendingItem) => (
     <LargeCard

@@ -9,6 +9,7 @@ interface Movie {
   backdrop_path: string;
   name: string;
   type: string;
+  bookmark?: boolean;
   // Add other relevant movie properties based on the API response
 }
 
@@ -24,10 +25,12 @@ export default async function MovieList() {
       {movies.map((movie: Movie) => (
         <Card
           key={movie.id}
+          id={movie.id}
           title={movie.title}
           year={movie.release_date.slice(0, 4)}
           poster={movie.backdrop_path}
           name={movie.name}
+          bookmarked={movie.bookmark || false}
           type="Movie"
         />
       ))}
