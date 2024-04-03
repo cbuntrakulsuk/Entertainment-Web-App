@@ -28,7 +28,11 @@ export default function RootLayout({
         <BookmarkProvider>
           <div className="flex justify-center">
             <div className="w-full max-w-screen-2xl flex">
-              <Navbar />
+              <div className="w-44">
+                <div className="fixed">
+                  <Navbar />
+                </div>
+              </div>
               <div className="mt-12 w-[1240px]">
                 <Search />
                 <div>{children}</div>

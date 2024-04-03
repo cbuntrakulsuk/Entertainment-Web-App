@@ -32,7 +32,6 @@ const Card = (props: {
     bookmarked: boolean;
     id: number;
   }) => {
-    console.log(cardData.poster);
     addBookmark(cardData);
     setIsBookmarked(!isBookmarked);
   };

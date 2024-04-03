@@ -11,7 +11,6 @@ const BookmarkProvider = ({ children }) => {
   const [bookmarkList, setBookmarkList] = useState([]);
 
   const addBookmark = (cardData) => {
-    console.log(cardData.poster);
     setBookmarkList((prevList) => [...prevList, cardData]);
     console.log(cardData);
   };

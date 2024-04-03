@@ -18,20 +18,23 @@ const Bookmarks = () => {
   const { bookmarkList } = useContext(BookmarkContext);
   console.log(bookmarkList);
   return (
-    <div className="grid grid-cols-4 gap-x-10">
-      {bookmarkList.map((movie: Movie) => (
-        <Card
-          key={movie.id}
-          id={movie.id}
-          title={movie.title}
-          year={movie.year}
-          poster={movie.poster}
-          name={movie.name}
-          bookmarked={movie.bookmark || false}
-          type="Movie"
-        />
-      ))}
-    </div>
+    <main className="mb-14">
+      <h1 className="text-4xl mt-10 font-light">Bookmarks</h1>
+      <div className="grid grid-cols-4 gap-x-10">
+        {bookmarkList.map((movie: Movie) => (
+          <Card
+            key={movie.id}
+            id={movie.id}
+            title={movie.title}
+            year={movie.year}
+            poster={movie.poster}
+            name={movie.name}
+            bookmarked={movie.bookmark || false}
+            type={movie.type}
+          />
+        ))}
+      </div>
+    </main>
   );
 };
 
