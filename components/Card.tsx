@@ -20,7 +20,8 @@ const Card = (props: {
 }) => {
   const [hovered, setHovered] = useState(false);
   //const [isBookmarked, setIsBookmarked] = useState(false);
-  const { addBookmark, bookmarkList } = useContext(BookmarkContext);
+  const { removeBookmark, addBookmark, bookmarkList } =
+    useContext(BookmarkContext);
   const isBookmarked = bookmarkList.some((item) => item.id === props.id);
   const handleBookmark = (cardData: {
     key: number;
@@ -32,7 +33,14 @@ const Card = (props: {
     bookmarked: boolean;
     id: number;
   }) => {
-    addBookmark(cardData);
+    //check if bookmark already exisits in list
+    if (bookmarkList.some((item) => item.id === cardData.id)) {
+      console.log("Bookmark already exists");
+      //remove from bookmark list
+      removeBookmark(cardData);
+    } else {
+      addBookmark(cardData);
+    }
   };
 
   return (
