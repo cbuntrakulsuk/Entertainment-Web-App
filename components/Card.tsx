@@ -19,9 +19,9 @@ const Card = (props: {
   bookmarked: boolean;
 }) => {
   const [hovered, setHovered] = useState(false);
-  const [isBookmarked, setIsBookmarked] = useState(false);
-  const { addBookmark } = useContext(BookmarkContext);
-
+  //const [isBookmarked, setIsBookmarked] = useState(false);
+  const { addBookmark, bookmarkList } = useContext(BookmarkContext);
+  const isBookmarked = bookmarkList.some((item) => item.id === props.id);
   const handleBookmark = (cardData: {
     key: number;
     poster: string;
@@ -33,7 +33,6 @@ const Card = (props: {
     id: number;
   }) => {
     addBookmark(cardData);
-    setIsBookmarked(!isBookmarked);
   };
 
   return (
