@@ -12,6 +12,7 @@ const Bookmarks = () => {
     name: string;
     type: string;
     bookmark?: boolean;
+    airDate?: string;
     // Add other relevant movie properties based on the API response
   }
 
@@ -27,6 +28,7 @@ const Bookmarks = () => {
             id={movie.id}
             title={movie.title}
             year={movie.year}
+            airDate={movie.airDate}
             poster={movie.poster}
             name={movie.name}
             bookmarked={movie.bookmark || false}

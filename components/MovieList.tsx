@@ -1,6 +1,7 @@
 import tmdb from "../app/api/tmdb"; // Assuming tmdb.js is in the same directory
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Card from "@/components/Card";
+//import { SearchContext } from "@/components/SearchContext";
 
 interface Movie {
   id: number; // Assuming ID exists in the response
@@ -19,7 +20,9 @@ async function getMovies() {
 }
 
 export default async function MovieList() {
+  //const { search, setSearch } = useContext(SearchContext);
   const movies = await getMovies();
+
   return (
     <div className="grid grid-cols-4 gap-x-10">
       {movies.map((movie: Movie) => (

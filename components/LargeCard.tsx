@@ -1,7 +1,8 @@
 "use client";
-import React from "react";
+import React, { useContext } from "react";
 import Image from "next/image";
 import { useState } from "react";
+import { BookmarkContext } from "@/components/BookmarkContext";
 //image imports
 import PlayIcon from "../public/assets/icon-play.svg";
 import BookmarkEmpty from "../public/assets/icon-bookmark-empty.svg";
@@ -15,9 +16,36 @@ const LargeCard = (props: {
   type: string;
   name: string;
   airDate: string;
+  id: number;
+  bookmarked: boolean;
 }) => {
   const [hovered, setHovered] = useState(false);
-  const [isBookmarked, setIsBookmarked] = useState(false);
+  //const [isBookmarked, setIsBookmarked] = useState(false);
+
+  const { removeBookmark, addBookmark, bookmarkList } =
+    useContext(BookmarkContext);
+  const isBookmarked = bookmarkList.some((item) => item.id === props.id);
+
+  const handleBookmark = (cardData: {
+    key: number;
+    poster: string;
+    year: string;
+    title: string;
+    type: string;
+    name: string;
+    bookmarked: boolean;
+    id: number;
+    airDate?: string;
+  }) => {
+    //check if bookmark already exisits in list
+    if (bookmarkList.some((item) => item.id === cardData.id)) {
+      console.log("Bookmark already exists");
+      //remove from bookmark list
+      removeBookmark(cardData);
+    } else {
+      addBookmark(cardData);
+    }
+  };
 
   return (
     <div
@@ -33,7 +61,7 @@ const LargeCard = (props: {
               ? "fill-white"
               : "fill-[#979797]} stroke-white hover:stroke-black fill-none z-20"
           }`}
-          onClick={() => setIsBookmarked(!isBookmarked)}
+          onClick={() => handleBookmark(props)}
         />
       </div>
 

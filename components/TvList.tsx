@@ -8,6 +8,7 @@ interface Tv {
   first_air_date: string;
   backdrop_path: string;
   name: string;
+  bookmark?: boolean;
   // Add other relevant movie properties based on the API response
 }
 
@@ -23,12 +24,14 @@ export default async function TvList() {
     <div className="grid grid-cols-4 gap-x-10">
       {tv.map((tv: Tv) => (
         <Card
+          id={tv.id}
           key={tv.id}
           title={tv.title}
           year={tv.first_air_date.slice(0, 4)}
           poster={tv.backdrop_path}
           type="TV Series"
           name={tv.name}
+          bookmarked={tv.bookmark || false}
         />
       ))}
     </div>

@@ -5,6 +5,7 @@ import { useState } from "react";
 import { BookmarkContext } from "@/components/BookmarkContext";
 //image imports
 import PlayIcon from "../public/assets/icon-play.svg";
+import fallbackImage from "../public/assets/thumbnails/dogs/regular/medium.jpg";
 import BookmarkEmpty from "../public/assets/icon-bookmark-empty.svg";
 const CardImgPath = "https://image.tmdb.org/t/p/w500";
 
@@ -17,12 +18,14 @@ const Card = (props: {
   name: string;
   id: number;
   bookmarked: boolean;
+  airDate?: string;
 }) => {
   const [hovered, setHovered] = useState(false);
   //const [isBookmarked, setIsBookmarked] = useState(false);
   const { removeBookmark, addBookmark, bookmarkList } =
     useContext(BookmarkContext);
   const isBookmarked = bookmarkList.some((item) => item.id === props.id);
+  const [imageError, setImageError] = useState(false);
   const handleBookmark = (cardData: {
     key: number;
     poster: string;
@@ -32,6 +35,7 @@ const Card = (props: {
     name: string;
     bookmarked: boolean;
     id: number;
+    airDate?: string;
   }) => {
     //check if bookmark already exisits in list
     if (bookmarkList.some((item) => item.id === cardData.id)) {
@@ -78,19 +82,44 @@ const Card = (props: {
       </div>
 
       {/* Image */}
-      <Image
-        className="rounded-lg"
-        src={CardImgPath + props.poster}
-        alt="Movie Card" // Descriptive alternative text
-        width={280}
-        height={174}
-      />
+      <>
+        <>
+          {!imageError ? (
+            <Image
+              className="rounded-lg"
+              src={CardImgPath + props.poster}
+              alt="Movie Card"
+              width={280}
+              height={174}
+              onError={() => {
+                console.error(
+                  "Image failed to load:",
+                  CardImgPath + props.poster
+                );
+                setImageError(true);
+              }}
+            />
+          ) : (
+            <Image
+              className="rounded-lg h-[157.5px]"
+              src={fallbackImage}
+              alt="Movie Card"
+              width={280}
+              height={174}
+            />
+          )}
+        </>
+      </>
 
       {/* Additional information */}
       <div className="mt-2 ml-1">
         <ul className="list-disc flex font-light text-[13px]">
-          <li className="mr-7 list-none">{props.year}</li>
-          <li className="mr-7">{props.type}</li>
+          <li className="mr-7 list-none">
+            {props.year ? props.year.slice(0, 4) : props.airDate?.slice(0, 4)}
+          </li>
+          <li className="mr-7">
+            {props.type === "tv" ? "TV Series" : "Movie"}
+          </li>
           <li className="mr-7">PG</li>
         </ul>
         <div className="text-lg mt-1">

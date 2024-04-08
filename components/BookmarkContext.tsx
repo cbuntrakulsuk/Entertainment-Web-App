@@ -9,6 +9,7 @@ type cardData = {
   name: string;
   id: number;
   bookmarked: boolean;
+  airDate?: string;
 };
 const BookmarkContext = createContext<{
   removeBookmark: (cardData: {
@@ -20,6 +21,7 @@ const BookmarkContext = createContext<{
     name: string;
     id: number;
     bookmarked: boolean;
+    airDate?: string;
   }) => void;
   addBookmark: (cardData: {
     key: number;
@@ -30,6 +32,7 @@ const BookmarkContext = createContext<{
     name: string;
     id: number;
     bookmarked: boolean;
+    airDate?: string;
   }) => void;
   bookmarkList: cardData[];
 }>({
@@ -50,6 +53,7 @@ const BookmarkProvider = ({ children }: { children: React.ReactNode }) => {
     name: string;
     id: number;
     bookmarked: boolean;
+    airDate?: string;
   }) => {
     setBookmarkList((prevList) =>
       prevList.filter((item) => item.id !== cardData.id)
@@ -65,6 +69,7 @@ const BookmarkProvider = ({ children }: { children: React.ReactNode }) => {
     name: string;
     id: number;
     bookmarked: boolean;
+    airDate?: string;
   }) => {
     setBookmarkList((prevList) => [...prevList, cardData]);
     console.log(bookmarkList);

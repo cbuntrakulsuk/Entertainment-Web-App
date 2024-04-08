@@ -31,6 +31,8 @@ export default async function TrendingList() {
       poster={item.backdrop_path}
       type={item.media_type}
       airDate={item.first_air_date}
+      id={item.id}
+      bookmarked={false}
     />
   ));
 
