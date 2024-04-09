@@ -1,12 +1,14 @@
 "use client";
 import React, { useContext } from "react";
 import { useState } from "react";
-import { SearchContext } from "@/components/SearchContext";
+// import { SearchContext } from "@/components/SearchContext";
 //image imports
 import SearchIcon from "../public/assets/icon-search.svg";
+import { useRouter } from "next/navigation";
 
 const Search = () => {
-  const { search, setSearch } = useContext(SearchContext);
+  const router = useRouter();
+  const [search, setSearch] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const handleFocus = () => setIsFocused(true);
   const handleBlur = () => setIsFocused(false);
@@ -14,6 +16,17 @@ const Search = () => {
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
   };
+
+  const handleKeyPress = (event: {
+    key: string;
+    preventDefault: () => void;
+  }) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      router.push(`/movies?search=${search}`);
+    }
+  };
+
   return (
     <>
       <div className="w-full flex items-center">
@@ -26,6 +39,7 @@ const Search = () => {
           onFocus={handleFocus}
           onBlur={handleBlur}
           onChange={handleSearch}
+          onKeyDown={handleKeyPress}
         />
       </div>
       <div

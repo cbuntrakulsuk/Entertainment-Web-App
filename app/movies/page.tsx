@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { GetServerSideProps } from "next";
 import MovieList from "../../components/MovieList";
 
 const Movies = () => {

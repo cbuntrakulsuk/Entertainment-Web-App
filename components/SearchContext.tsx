@@ -17,7 +17,7 @@ const SearchContext = createContext<SearchContextType>({
 });
 
 const SearchProvider = ({ children }: { children: React.ReactNode }) => {
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState("test");
   return (
     <SearchContext.Provider value={{ search, setSearch }}>
       {children}
