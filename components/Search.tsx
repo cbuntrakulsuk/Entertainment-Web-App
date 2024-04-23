@@ -17,13 +17,10 @@ const Search = () => {
     setSearch(event.target.value);
   };
 
-  const handleKeyPress = (event: {
-    key: string;
-    preventDefault: () => void;
-  }) => {
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
       event.preventDefault();
-      router.push(`/movies?search=${search}`);
+      router.push(`/search?query=${search}`);
     }
   };
 

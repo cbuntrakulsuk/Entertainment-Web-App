@@ -3,19 +3,23 @@ import Card from "@/components/Card";
 import { fetchTmdb } from "@/utils";
 import { CardItem } from "@/types"; // Import the 'Item' type
 
-export default async function Movies({
+export default async function Search({
   searchParams,
 }: {
   searchParams: {
-    search: string;
+    query: string;
   };
 }) {
-  const { search } = searchParams;
-  const response = await fetchTmdb(search);
-  const { results } = response;
+  const { query } = searchParams;
+  console.log(query);
+  const response = await fetchTmdb(`/search/multi?query=${query}`);
+  const { results, total_results } = response;
+  //console.log(filtered);
   return (
     <>
-      <h1 className="text-4xl mt-10 font-light">Movies</h1>
+      <h1 className="text-4xl mt-10 font-light">
+        Found {total_results} Results for {query}
+      </h1>
       <div className="grid grid-cols-4 gap-x-10 mb-14">
         {results.map((movie: CardItem) => (
           <Card

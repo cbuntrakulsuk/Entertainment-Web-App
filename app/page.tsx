@@ -12,14 +12,15 @@ export default async function Home({
 }) {
   let { search } = searchParams;
   search = search || "trending/all/week";
-  const movies = await fetchTmdb(search);
+  const response = await fetchTmdb(search);
+  const { results } = response;
   return (
     <main className="mb-14">
       <h1 className="text-4xl mt-10 font-light mb-6">Trending</h1>
       <TrendingList />
       <h1 className="text-4xl mt-10 font-light">Recommeded for you</h1>
       <div className="grid grid-cols-4 gap-x-10 mb-14">
-        {movies.map((movie: CardItem) => (
+        {results.map((movie: CardItem) => (
           <Card
             key={movie.id}
             id={movie.id}

@@ -11,12 +11,13 @@ export default async function tvSeries({
   };
 }) {
   const { search } = searchParams;
-  const tv = await fetchTmdb(search);
+  const response = await fetchTmdb(search);
+  const { results } = response;
   return (
     <>
       <h1 className="text-4xl mt-10 font-light">TV Series</h1>
       <div className="grid grid-cols-4 gap-x-10 mb-14">
-        {tv.map((tv: CardItem) => (
+        {results.map((tv: CardItem) => (
           <Card
             id={tv.id}
             key={tv.id}

@@ -6,8 +6,9 @@ import { fetchTmdb } from "@/utils";
 import { TrendingItem } from "@/types";
 
 export default async function TrendingList() {
-  const trendingResponse = await fetchTmdb("trending/all/day");
-  const trending = trendingResponse.slice(0, 5);
+  const response = await fetchTmdb("trending/all/day");
+  const { results } = response;
+  const trending = results.slice(0, 5);
 
   const cards = trending.map((item: TrendingItem) => (
     <LargeCard
