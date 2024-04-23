@@ -26,7 +26,14 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="pb-10 flex justify-center items-center">
-          <Link href="/">
+          <Link
+            href={{
+              pathname: "/",
+              query: {
+                search: "trending/all/week",
+              },
+            }}
+          >
             <Home
               className={`${
                 activeCategory === "home" ? "fill-redAccent" : "fill-grayBlue"
@@ -36,7 +43,14 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="pb-10 flex justify-center items-center">
-          <Link href="/movies">
+          <Link
+            href={{
+              pathname: "/movies",
+              query: {
+                search: "movie/popular",
+              },
+            }}
+          >
             <Movies
               className={`${
                 activeCategory === "movies" ? "fill-redAccent" : "fill-grayBlue"
@@ -46,7 +60,14 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="pb-10 flex justify-center items-center">
-          <Link href="/tv">
+          <Link
+            href={{
+              pathname: "/tv",
+              query: {
+                search: "tv/popular",
+              },
+            }}
+          >
             <TV
               className={`${
                 activeCategory === "tv" ? "fill-redAccent" : "fill-grayBlue"
