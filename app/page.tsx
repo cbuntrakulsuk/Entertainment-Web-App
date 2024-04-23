@@ -1,6 +1,6 @@
 import Card from "@/components/Card";
 import TrendingList from "@/components/TrendingList";
-import { CardItem } from "@/types";
+import { CardItem, mediaInfo } from "@/types";
 import { fetchTmdb } from "@/utils";
 
 export default async function Home({
@@ -20,19 +20,16 @@ export default async function Home({
       <TrendingList />
       <h1 className="text-4xl mt-10 font-light">Recommeded for you</h1>
       <div className="grid grid-cols-4 gap-x-10 mb-14">
-        {results.map((movie: CardItem) => (
+        {results.map((movie: mediaInfo) => (
           <Card
             key={movie.id}
             id={movie.id}
             title={movie.title}
-            year={
-              movie.first_air_date
-                ? movie.first_air_date
-                : movie.release_date || ""
-            }
-            poster={movie.backdrop_path}
+            first_air_date={movie.first_air_date}
+            release_date={movie.release_date}
+            backdrop_path={movie.backdrop_path}
             name={movie.name}
-            bookmarked={movie.bookmark || false}
+            bookmark={movie.bookmark || false}
             type={movie.media_type}
           />
         ))}

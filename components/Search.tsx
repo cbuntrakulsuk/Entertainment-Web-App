@@ -1,7 +1,7 @@
 "use client";
 import React, { useContext } from "react";
 import { useState } from "react";
-// import { SearchContext } from "@/components/SearchContext";
+
 //image imports
 import SearchIcon from "../public/assets/icon-search.svg";
 import { useRouter } from "next/navigation";
@@ -21,6 +21,7 @@ const Search = () => {
     if (event.key === "Enter") {
       event.preventDefault();
       router.push(`/search?query=${search}`);
+      setSearch("");
     }
   };
 
@@ -29,6 +30,7 @@ const Search = () => {
       <div className="w-full flex items-center">
         <SearchIcon />
         <input
+          value={search}
           id="search"
           type="text"
           className="w-[450px] pl-4 pr-3 py-2 mx-2 text-2xl bg-transparent focus:outline-none font-light"

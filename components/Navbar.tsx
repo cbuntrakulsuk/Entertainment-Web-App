@@ -36,7 +36,7 @@ const Navbar = () => {
           >
             <Home
               className={`${
-                activeCategory === "home" ? "fill-redAccent" : "fill-grayBlue"
+                activeCategory === "home" ? "fill-white" : "fill-grayBlue"
               } hover:fill-redAccent`}
               onClick={() => handleClick("home")}
             />
@@ -53,7 +53,7 @@ const Navbar = () => {
           >
             <Movies
               className={`${
-                activeCategory === "movies" ? "fill-redAccent" : "fill-grayBlue"
+                activeCategory === "movies" ? "fill-white" : "fill-grayBlue"
               } hover:fill-redAccent`}
               onClick={() => handleClick("movies")}
             />
@@ -70,7 +70,7 @@ const Navbar = () => {
           >
             <TV
               className={`${
-                activeCategory === "tv" ? "fill-redAccent" : "fill-grayBlue"
+                activeCategory === "tv" ? "fill-white" : "fill-grayBlue"
               } hover:fill-redAccent`}
               onClick={() => handleClick("tv")}
             />

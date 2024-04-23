@@ -3,47 +3,27 @@ import React, { useContext } from "react";
 import Image from "next/image";
 import { useState } from "react";
 import { BookmarkContext } from "@/components/BookmarkContext";
+
 //image imports
 import PlayIcon from "../public/assets/icon-play.svg";
 import fallbackImage from "../public/assets/thumbnails/dogs/regular/medium.jpg";
 import BookmarkEmpty from "../public/assets/icon-bookmark-empty.svg";
+import { cardData, mediaInfo } from "@/types";
 const CardImgPath = "https://image.tmdb.org/t/p/w500";
 
-const Card = (props: {
-  key: number;
-  poster: string;
-  year: string;
-  title: string;
-  type: string;
-  name: string;
-  id: number;
-  bookmarked: boolean;
-  airDate?: string;
-}) => {
+const Card = (props: mediaInfo) => {
   const [hovered, setHovered] = useState(false);
-  //const [isBookmarked, setIsBookmarked] = useState(false);
   const { removeBookmark, addBookmark, bookmarkList } =
     useContext(BookmarkContext);
   const isBookmarked = bookmarkList.some((item) => item.id === props.id);
   const [imageError, setImageError] = useState(false);
-  const handleBookmark = (cardData: {
-    key: number;
-    poster: string;
-    year: string;
-    title: string;
-    type: string;
-    name: string;
-    bookmarked: boolean;
-    id: number;
-    airDate?: string;
-  }) => {
-    //check if bookmark already exisits in list
-    if (bookmarkList.some((item) => item.id === cardData.id)) {
+
+  const handleBookmark = (data: mediaInfo) => {
+    if (bookmarkList.some((item) => item.id === data.id)) {
       console.log("Bookmark already exists");
-      //remove from bookmark list
-      removeBookmark(cardData);
+      removeBookmark(data);
     } else {
-      addBookmark(cardData);
+      addBookmark(data);
     }
   };
 
@@ -87,14 +67,14 @@ const Card = (props: {
           {!imageError ? (
             <Image
               className="rounded-lg"
-              src={CardImgPath + props.poster}
+              src={CardImgPath + props.backdrop_path}
               alt="Movie Card"
               width={280}
               height={174}
               onError={() => {
                 console.error(
                   "Image failed to load:",
-                  CardImgPath + props.poster
+                  CardImgPath + props.backdrop_path
                 );
                 setImageError(true);
               }}
@@ -115,7 +95,9 @@ const Card = (props: {
       <div className="mt-2 ml-1">
         <ul className="list-disc flex font-light text-[13px]">
           <li className="mr-7 list-none">
-            {props.year ? props.year.slice(0, 4) : props.airDate?.slice(0, 4)}
+            {props.release_date
+              ? props.release_date.slice(0, 4)
+              : props.first_air_date?.slice(0, 4)}
           </li>
           <li className="mr-7">
             {props.type === "tv" ? "TV Series" : "Movie"}

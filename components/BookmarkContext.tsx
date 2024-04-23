@@ -1,40 +1,23 @@
 "use client";
+import { mediaInfo } from "@/types";
 import React, { createContext, useState } from "react";
-type cardData = {
-  key: number;
-  poster: string;
-  year: string;
-  title: string;
-  type: string;
-  name: string;
-  id: number;
-  bookmarked: boolean;
-  airDate?: string;
-};
+
+// type cardData = {
+//   key: number;
+//   poster: string;
+//   year: string;
+//   title: string;
+//   type: string;
+//   name: string;
+//   id: number;
+//   bookmarked: boolean;
+//   airDate?: string;
+// };
+
 const BookmarkContext = createContext<{
-  removeBookmark: (cardData: {
-    key: number;
-    poster: string;
-    year: string;
-    title: string;
-    type: string;
-    name: string;
-    id: number;
-    bookmarked: boolean;
-    airDate?: string;
-  }) => void;
-  addBookmark: (cardData: {
-    key: number;
-    poster: string;
-    year: string;
-    title: string;
-    type: string;
-    name: string;
-    id: number;
-    bookmarked: boolean;
-    airDate?: string;
-  }) => void;
-  bookmarkList: cardData[];
+  removeBookmark: (cardData: mediaInfo) => void;
+  addBookmark: (cardData: mediaInfo) => void;
+  bookmarkList: mediaInfo[];
 }>({
   removeBookmark: () => {},
   addBookmark: () => {},
@@ -42,35 +25,15 @@ const BookmarkContext = createContext<{
 });
 
 const BookmarkProvider = ({ children }: { children: React.ReactNode }) => {
-  const [bookmarkList, setBookmarkList] = useState<cardData[]>([]);
+  const [bookmarkList, setBookmarkList] = useState<mediaInfo[]>([]);
 
-  const removeBookmark = (cardData: {
-    key: number;
-    poster: string;
-    year: string;
-    title: string;
-    type: string;
-    name: string;
-    id: number;
-    bookmarked: boolean;
-    airDate?: string;
-  }) => {
+  const removeBookmark = (cardData: mediaInfo) => {
     setBookmarkList((prevList) =>
       prevList.filter((item) => item.id !== cardData.id)
     );
   };
 
-  const addBookmark = (cardData: {
-    key: number;
-    poster: string;
-    year: string;
-    title: string;
-    type: string;
-    name: string;
-    id: number;
-    bookmarked: boolean;
-    airDate?: string;
-  }) => {
+  const addBookmark = (cardData: mediaInfo) => {
     setBookmarkList((prevList) => [...prevList, cardData]);
     console.log(bookmarkList);
   };

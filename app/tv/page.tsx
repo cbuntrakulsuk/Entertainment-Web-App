@@ -22,11 +22,11 @@ export default async function tvSeries({
             id={tv.id}
             key={tv.id}
             title={tv.title}
-            year={tv.first_air_date.slice(0, 4)}
-            poster={tv.backdrop_path}
+            first_air_date={tv.first_air_date.slice(0, 4)}
+            backdrop_path={tv.backdrop_path}
             type="tv"
             name={tv.name}
-            bookmarked={tv.bookmark || false}
+            bookmark={tv.bookmark || false}
           />
         ))}
       </div>

@@ -6,19 +6,10 @@ import { BookmarkContext } from "@/components/BookmarkContext";
 //image imports
 import PlayIcon from "../public/assets/icon-play.svg";
 import BookmarkEmpty from "../public/assets/icon-bookmark-empty.svg";
+import { mediaInfo } from "@/types";
 const CardImgPath = "https://image.tmdb.org/t/p/w500";
 
-const LargeCard = (props: {
-  key: number;
-  poster: string;
-  year: string;
-  title: string;
-  type: string;
-  name: string;
-  airDate: string;
-  id: number;
-  bookmarked: boolean;
-}) => {
+const LargeCard = (props: mediaInfo) => {
   const [hovered, setHovered] = useState(false);
   //const [isBookmarked, setIsBookmarked] = useState(false);
 
@@ -26,17 +17,7 @@ const LargeCard = (props: {
     useContext(BookmarkContext);
   const isBookmarked = bookmarkList.some((item) => item.id === props.id);
 
-  const handleBookmark = (cardData: {
-    key: number;
-    poster: string;
-    year: string;
-    title: string;
-    type: string;
-    name: string;
-    bookmarked: boolean;
-    id: number;
-    airDate?: string;
-  }) => {
+  const handleBookmark = (cardData: mediaInfo) => {
     //check if bookmark already exisits in list
     if (bookmarkList.some((item) => item.id === cardData.id)) {
       console.log("Bookmark already exists");
@@ -84,7 +65,7 @@ const LargeCard = (props: {
       {/* Image */}
       <Image
         className="rounded-lg "
-        src={CardImgPath + props.poster}
+        src={CardImgPath + props.backdrop_path}
         alt="Movie Card" // Descriptive alternative text
         width={470}
         height={264}
@@ -94,10 +75,12 @@ const LargeCard = (props: {
       <div className="mt-2  absolute bottom-0 m-5">
         <ul className="list-disc flex font-light text-[15px]">
           <li className="mr-7 list-none">
-            {props.year ? props.year.slice(0, 4) : props.airDate.slice(0, 4)}
+            {props.release_date
+              ? props.release_date.slice(0, 4)
+              : props.first_air_date?.slice(0, 4) ?? undefined}
           </li>
           <li className="mr-7">
-            {props.type === "tv" ? "TV Series" : "Movie"}
+            {props.media_type === "tv" ? "TV Series" : "Movie"}
           </li>
           <li className="mr-7">PG</li>
         </ul>
