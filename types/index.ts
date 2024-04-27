@@ -11,4 +11,5 @@ export interface mediaInfo {
   media_type?: string;
   bookmark: boolean;
   type?: string;
+  cert?: any;
 }

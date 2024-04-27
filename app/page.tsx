@@ -1,6 +1,6 @@
 import Card from "@/components/Card";
 import TrendingList from "@/components/TrendingList";
-import { CardItem, mediaInfo } from "@/types";
+import { mediaInfo } from "@/types";
 import { fetchTmdb } from "@/utils";
 
 export default async function Home({

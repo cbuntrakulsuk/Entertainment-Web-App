@@ -8,7 +8,7 @@ import { BookmarkContext } from "@/components/BookmarkContext";
 import PlayIcon from "../public/assets/icon-play.svg";
 import fallbackImage from "../public/assets/thumbnails/dogs/regular/medium.jpg";
 import BookmarkEmpty from "../public/assets/icon-bookmark-empty.svg";
-import { cardData, mediaInfo } from "@/types";
+import { mediaInfo } from "@/types";
 const CardImgPath = "https://image.tmdb.org/t/p/w500";
 
 const Card = (props: mediaInfo) => {
@@ -102,7 +102,7 @@ const Card = (props: mediaInfo) => {
           <li className="mr-7">
             {props.type === "tv" ? "TV Series" : "Movie"}
           </li>
-          <li className="mr-7">PG</li>
+          <li className="mr-7">{props.cert}</li>
         </ul>
         <div className="text-lg mt-1">
           {props.title ? props.title : props.name}
