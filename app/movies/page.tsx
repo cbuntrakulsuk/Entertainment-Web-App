@@ -10,9 +10,9 @@ export default async function Movies({
     search: string;
   };
 }) {
+  // Fetch movies
   const { search } = searchParams;
-  const response = await fetchTmdb(search);
-  const { results } = response;
+  const { results } = await fetchTmdb(search);
 
   // Fetch the certification for each movie
   const certs = await Promise.all(
@@ -20,20 +20,6 @@ export default async function Movies({
       fetchCert(item.id, "movie")
     )
   );
-
-  // map over certs array and fetch only the US certification property and log to terminal
-  const certifications = certs.map((certArray: any[], index: number) => {
-    const usCert = certArray.find(
-      (c: { iso_3166_1: string }) => c.iso_3166_1 === "US"
-    );
-    const type3Date = usCert?.release_dates.find(
-      (date: { type: number; certification: string }) =>
-        [1, 2, 3, 4, 5, 6].includes(date.type) && date.certification !== ""
-    );
-    return type3Date?.certification;
-  });
-
-  console.log(certifications);
 
   return (
     <>
@@ -51,7 +37,7 @@ export default async function Movies({
             name={movie.name}
             bookmark={movie.bookmark || false}
             type="Movie"
-            cert={certifications[index] || "NR"}
+            cert={certs[index] || "NR"}
           />
         ))}
       </div>

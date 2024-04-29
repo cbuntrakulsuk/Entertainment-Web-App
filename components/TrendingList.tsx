@@ -1,7 +1,7 @@
 import React from "react";
 import Slider from "@/components/Slider";
 import LargeCard from "./LargeCard";
-import { fetchTmdb } from "@/utils";
+import { fetchCert, fetchTmdb } from "@/utils";
 import { mediaInfo } from "@/types";
 
 export default async function TrendingList() {
@@ -9,7 +9,15 @@ export default async function TrendingList() {
   const { results } = response;
   const trending = results.slice(0, 5);
 
-  const cards = trending.map((item: mediaInfo) => (
+  // Fetch the certification for each movie
+  const certs = await Promise.all(
+    trending.map((item: { id: number; media_type: string }) =>
+      fetchCert(item.id, item.media_type)
+    )
+  );
+
+  console.log(certs);
+  const cards = trending.map((item: mediaInfo, index: number) => (
     <LargeCard
       key={item.id}
       title={item.title}
@@ -20,6 +28,7 @@ export default async function TrendingList() {
       first_air_date={item.first_air_date}
       id={item.id}
       bookmark={false}
+      cert={certs[index] || "NR"}
     />
   ));
 

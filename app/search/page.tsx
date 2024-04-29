@@ -1,7 +1,7 @@
 import React from "react";
 import Card from "@/components/Card";
-import { fetchTmdb } from "@/utils";
-import { CardItem, mediaInfo } from "@/types"; // Import the 'Item' type
+import { fetchCert, fetchTmdb } from "@/utils";
+import { mediaInfo } from "@/types"; // Import the 'Item' type
 
 export default async function Search({
   searchParams,
@@ -11,9 +11,9 @@ export default async function Search({
   };
 }) {
   const { query } = searchParams;
-  console.log(query);
   const response = await fetchTmdb(`/search/multi?query=${query}`);
   const { results, total_results } = response;
+
   return (
     <>
       <h1 className="text-4xl mt-10 font-light">

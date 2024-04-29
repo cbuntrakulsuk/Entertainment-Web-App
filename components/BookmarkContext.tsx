@@ -2,18 +2,6 @@
 import { mediaInfo } from "@/types";
 import React, { createContext, useState } from "react";
 
-// type cardData = {
-//   key: number;
-//   poster: string;
-//   year: string;
-//   title: string;
-//   type: string;
-//   name: string;
-//   id: number;
-//   bookmarked: boolean;
-//   airDate?: string;
-// };
-
 const BookmarkContext = createContext<{
   removeBookmark: (cardData: mediaInfo) => void;
   addBookmark: (cardData: mediaInfo) => void;
@@ -34,6 +22,7 @@ const BookmarkProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const addBookmark = (cardData: mediaInfo) => {
+    console.log(cardData);
     setBookmarkList((prevList) => [...prevList, cardData]);
     console.log(bookmarkList);
   };

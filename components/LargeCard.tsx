@@ -82,7 +82,7 @@ const LargeCard = (props: mediaInfo) => {
           <li className="mr-7">
             {props.media_type === "tv" ? "TV Series" : "Movie"}
           </li>
-          <li className="mr-7">PG</li>
+          <li className="mr-7">{props.cert}</li>
         </ul>
         <div className="text-2xl mt-1">
           {props.title ? props.title : props.name}
