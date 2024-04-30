@@ -22,9 +22,7 @@ const BookmarkProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const addBookmark = (cardData: mediaInfo) => {
-    console.log(cardData);
     setBookmarkList((prevList) => [...prevList, cardData]);
-    console.log(bookmarkList);
   };
 
   return (

@@ -6,10 +6,10 @@ import { BookmarkContext } from "@/components/BookmarkContext";
 
 //image imports
 import PlayIcon from "../public/assets/icon-play.svg";
-import fallbackImage from "../public/assets/thumbnails/dogs/regular/medium.jpg";
+import fallbackImage from "../public/assets/thumbnails/dogs/regular/small.jpg";
 import BookmarkEmpty from "../public/assets/icon-bookmark-empty.svg";
 import { mediaInfo } from "@/types";
-const CardImgPath = "https://image.tmdb.org/t/p/w500";
+const CardImgPath = "https://image.tmdb.org/t/p/w300/";
 
 const Card = (props: mediaInfo) => {
   const [hovered, setHovered] = useState(false);
@@ -20,7 +20,6 @@ const Card = (props: mediaInfo) => {
 
   const handleBookmark = (data: mediaInfo) => {
     if (bookmarkList.some((item) => item.id === data.id)) {
-      console.log("Bookmark already exists");
       removeBookmark(data);
     } else {
       addBookmark(data);
@@ -29,7 +28,7 @@ const Card = (props: mediaInfo) => {
 
   return (
     <div
-      className="relative mt-10 w-[280px]"
+      className="relative mt-10 w-[280px] h-auto"
       onMouseOver={() => setHovered(true)}
       onMouseOut={() => setHovered(false)}
     >
@@ -65,26 +64,28 @@ const Card = (props: mediaInfo) => {
       <>
         <>
           {!imageError ? (
-            <Image
-              className="rounded-lg"
-              src={CardImgPath + props.backdrop_path}
-              alt="Movie Card"
-              width={280}
-              height={174}
-              onError={() => {
-                console.error(
-                  "Image failed to load:",
-                  CardImgPath + props.backdrop_path
-                );
-                setImageError(true);
-              }}
-            />
+            <div className="card">
+              <Image
+                className="rounded-lg"
+                src={CardImgPath + props.backdrop_path}
+                alt="Movie Card"
+                width={300}
+                height={174}
+                onError={() => {
+                  console.error(
+                    "Image failed to load:",
+                    CardImgPath + props.backdrop_path
+                  );
+                  setImageError(true);
+                }}
+              />
+            </div>
           ) : (
             <Image
-              className="rounded-lg h-[157.5px]"
+              className="rounded-lg"
               src={fallbackImage}
               alt="Movie Card"
-              width={280}
+              width={300}
               height={174}
             />
           )}

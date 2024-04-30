@@ -15,8 +15,6 @@ export default async function TrendingList() {
       fetchCert(item.id, item.media_type)
     )
   );
-
-  console.log(certs);
   const cards = trending.map((item: mediaInfo, index: number) => (
     <LargeCard
       key={item.id}

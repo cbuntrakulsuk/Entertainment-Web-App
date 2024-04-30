@@ -20,7 +20,6 @@ const LargeCard = (props: mediaInfo) => {
   const handleBookmark = (cardData: mediaInfo) => {
     //check if bookmark already exisits in list
     if (bookmarkList.some((item) => item.id === cardData.id)) {
-      console.log("Bookmark already exists");
       //remove from bookmark list
       removeBookmark(cardData);
     } else {
